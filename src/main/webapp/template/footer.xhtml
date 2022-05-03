@@ -1,0 +1,65 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:mj="http://mojarra.dev.java.net/mojarra_ext">
+
+	<div style="
+		color:white;	
+		background:gray; 	"	>
+
+		<div>			
+			<div style="	
+				height: 35px;			
+				align:left; 
+				display: inline-block; 
+				padding-top:0mm;
+				padding-bottom:0mm;" >
+				<h5 align="center"   style="padding-left:10px; 
+											color:white; width:60%;  
+											background: transparent;" >Interfaz de administración</h5>
+      		</div>	
+
+			<div style="	
+				height: 20px;			
+				align:right;
+				display: inline-block; 
+				padding-top:0mm;
+				padding-bottom:0mm;" >
+    			<h5 align="right" 
+    				style="
+    					color:white; 
+    					width:20%; 
+    					padding-left:40px;  
+    					
+    					background:transparent;" >Usuario: #{user.cod_usu_pri}</h5>
+    					
+    						
+    					
+    		</div>
+    		<div style="			
+				height: 35px;			
+				align:left;
+				display: inline-block; 
+				padding-top:0mm;
+				padding-bottom:0mm;" >
+    			<h:link align="left" 
+    				style="
+    					color:white; 
+    					
+    					align:left;
+    					width: 10%; 
+    					padding-tpp:20px;  
+    					
+    					background:transparent;" 
+    					outcome = "/index.html">Salir</h:link>	
+    					
+    		</div>	
+    		
+    		
+		</div>
+		
+	</div>
+</ui:composition>

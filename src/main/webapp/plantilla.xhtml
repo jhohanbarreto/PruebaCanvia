@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	
+<f:view contentType="text/html">
+	<h:head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/faces/resources/theme.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/faces/resources/primeicons/primeicons.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/faces/resources/fa/font-awesome.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/faces/resources/components.css" />
+
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/faces/resources/css/primeflex.min.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/faces/resources/css/primeicons.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/faces/resources/css/demo-light.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/faces/resources/css/layout-light.css" />
+		<script type="text/javascript"
+			src="#{request.contextPath}/faces/resources/js/layout.js"></script>
+		<script type="text/javascript"
+			src="#{request.contextPath}/faces/resources/js/prism.js"></script>
+		<title>AllMark</title>
+	</h:head>
+
+	<h:body class="main-body">
+		<div
+			class="layout-wrapper layout-topbar-light layout-static-active layout-menu-dim  layout-static layout-static-active ">
+
+			<div class="layout-topbar">
+				<div class="layout-topbar-wrapper">
+					<div class="layout-topbar-left">
+						<a id="logolink" name="logolink" href="dashboard.html"
+							class="layout-topbar-logo"><img id="j_idt12"
+							src=""
+							alt="" /></a>
+					</div>
+					<div class="layout-topbar-right">
+						<a href="#" class="menu-button"> <i class="pi pi-bars"></i>
+						</a>
+						
+						<ul class="layout-topbar-actions">
+						
+						<form>
+						    <h:panelGroup rendered="false">
+							<li class="search-item topbar-item"><a href="#"> <span
+									class="topbar-icon"> <i class="pi pi-search"></i>
+								</span>
+							</a>
+								<form id="j_idt14" name="j_idt14" method="post"
+									action="https://www.primefaces.org/poseidon/empty.xhtml"
+									enctype="application/x-www-form-urlencoded"
+									onsubmit="return false;">
+									<input type="hidden" name="j_idt14" value="j_idt14" /> <span
+										class="md-inputfield search-input-wrapper"><input
+										id="j_idt14:j_idt16" name="j_idt14:j_idt16" type="text"
+										class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all "
+										placeholder="Search..." /> <script id="j_idt14:j_idt16_s"
+											type="text/javascript">$(function () { PrimeFaces.cw("InputText", "widget_j_idt14_j_idt16", { id: "j_idt14:j_idt16" }); });</script>
+										<i class="fa fa-search"></i> </span><input type="hidden"
+										name="javax.faces.ViewState"
+										id="j_id1:javax.faces.ViewState:0"
+										value="8245484432864946380:-9066654144726287800"
+										autocomplete="off" />
+								</form>
+								<ul>
+									<form id="j_idt19" name="j_idt19" method="post"
+										action="https://www.primefaces.org/poseidon/empty.xhtml"
+										enctype="application/x-www-form-urlencoded"
+										onsubmit="return false;">
+										<input type="hidden" name="j_idt19" value="j_idt19" /> <span
+											class="md-inputfield search-input-wrapper"><input
+											id="j_idt19:j_idt21" name="j_idt19:j_idt21" type="text"
+											class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all "
+											placeholder="Buscar..." /> <script id="j_idt19:j_idt21_s"
+												type="text/javascript">$(function () { PrimeFaces.cw("InputText", "widget_j_idt19_j_idt21", { id: "j_idt19:j_idt21" }); });</script>
+											<i class="fa fa-search"></i> </span><input type="hidden"
+											name="javax.faces.ViewState"
+											id="j_id1:javax.faces.ViewState:1"
+											value="8245484432864946380:-9066654144726287800"
+											autocomplete="off" />
+									</form>
+								</ul>
+								
+								
+								</li>
+								
+							</h:panelGroup>
+						</form>
+							
+						
+							<li class="topbar-item user-profile">
+							    <a href="#">
+							       <img	id="j_idt32"
+							       		src="#{request.contextPath}/resources/images/avatar-profile.png"
+							       		alt="" />
+								   <div class="profile-info">
+										<h6>UsuarioCanvia</h6>
+										<span>
+										     <h:outputText value="Usuario" />
+                                        </span>
+								   </div>
+								</a>
+								<ul>
+								    <li class="layout-submenu-header">									     
+									<form>
+									     <h:panelGroup rendered="false">
+										 <img id="j_idt34"
+										      src="#{request.contextPath}/faces/avatar-profile.png"
+										      alt="" />
+										 </h:panelGroup>
+									</form>								         
+									     <div class="profile-info">
+									          <h6>UsuarioCanvia</h6>
+									          <span>
+									               <h:outputText value="Usuario" />
+									          </span>
+								         </div>
+								    </li>
+									     									     
+									     <li>
+									        <a href="#">
+									            <i class="pi pi-power-off"></i>
+											    <h6>
+												    <h:outputText value="Salir" />
+												</h6>												
+									        </a>
+									     </li>
+							    </ul>
+								     
+					        </li>
+						</ul>
+						<a href="#" class="layout-rightpanel-button"> <i
+							class="pi pi-arrow-left"></i>
+						</a>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="menu-wrapper">
+			
+			
+				<div class="layout-menu-container">
+				
+					<form id="menuform" name="menuform" method="post"
+						action="https://www.primefaces.org/poseidon/empty.xhtml"
+						enctype="application/x-www-form-urlencoded">
+						<input type="hidden" name="menuform" value="menuform" />
+						<ul id="menuform:j_idt37" class="layout-menu">
+							<li id="menuform:om_homepage" role="menuitem"
+								class="layout-root-menuitem">
+								<div>
+									<span class="layout-menuitem-text">
+									    <h:outputText value="Factura" />
+								    </span>
+								</div>
+								<a href="#">
+								   <i class="pi pi-home layout-menuitem-icon"></i>
+								   <span class="layout-menuitem-text">
+									   <h:outputText value="Factura" />
+								   </span>
+								   <i class="fa fa-fw layout-submenu-toggler fa-angle-down"></i>
+								</a>
+								<div class="layout-menu-tooltip">
+									<div class="layout-menu-tooltip-arrow"></div>
+									<div class="layout-menu-tooltip-text">
+									     <h:outputText value="Factura" />
+								    </div>
+								</div>
+								<ul role="menu">
+									<li id="menuform:om_dashboard" role="menuitem">
+									    <a href="cliente.xhtml">
+									       <i class="pi pi-home layout-menuitem-icon"></i>
+									       <span class="layout-menuitem-text">
+											     <h:outputText value="Cliente" />
+										   </span>
+										</a>
+										<div class="layout-menu-tooltip">
+											<div class="layout-menu-tooltip-arrow"></div>
+											<div class="layout-menu-tooltip-text">
+											    <h:outputText value="Cliente" />
+										    </div>
+										</div>
+							        </li>
+								</ul>
+								<ul role="menu">
+									<li id="menuform:om_dashboard" role="menuitem">
+									    <a href="categoria.xhtml">
+									       <i class="pi pi-home layout-menuitem-icon"></i>
+									       <span class="layout-menuitem-text">
+											     <h:outputText value="Categoria" />
+										   </span>
+										</a>
+										<div class="layout-menu-tooltip">
+											<div class="layout-menu-tooltip-arrow"></div>
+											<div class="layout-menu-tooltip-text">
+											    <h:outputText value="Categoria" />
+										    </div>
+										</div>
+							        </li>
+								</ul>
+							</li>
+							
+							
+							
+							<li class="Separator"></li>
+
+						</ul>
+						<script id="menuform:j_idt37_s" type="text/javascript">PrimeFaces.cw("Poseidon", "PoseidonMenuWidget", { id: "menuform:j_idt37", pathname: "/poseidon/empty.xhtml" });</script>
+						<input type="hidden" name="javax.faces.ViewState"
+							id="j_id1:javax.faces.ViewState:2"
+							value="8245484432864946380:-9066654144726287800"
+							autocomplete="off" />
+					</form>
+				</div>
+			</div>
+
+
+
+			<div class="layout-main">
+
+				<div class="layout-breadcrumb">
+				  <!--
+					<div class="breadcrumb">
+						 <div class="route-bar-breadcrumb">
+							<li>PAGES</li>
+							<li><i class="pi pi-chevron-right"></i></li>
+							<li><a href="empty.html" class="ui-link ui-widget">EMPTY</a>
+							</li>
+						 </div>
+				    </div>
+				   -->
+			    </div>		     
+				<div class="layout-content">
+					<div class="p-grid">
+						<div class="p-col">
+							<ui:insert name="content" />
+							<!--  
+						    <div class="card">
+							     <h5>ALL MARK Empty Page</h5>
+							     <p>This is your empty page template to start building
+								    beautiful applications.</p>
+						    </div>
+						    -->
+						</div>
+					</div>
+				</div>
+
+				<div class="layout-footer">
+					<a id="footerlogolink" name="footerlogolink" href="dashboard.html"></a>
+					<div class="social-icons">
+						<a><i class="pi pi-github"></i></a> <a><i
+							class="pi pi-facebook"></i></a> <a><i class="pi pi-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="layout-mask modal-in"></div>
+		</div>
+		<div id="j_idt116" class="layout-ajax-loader">
+			<div id="j_idt116_start" style="display: none">
+				<i class="pi pi-spin pi-spinner layout-ajax-loader-icon"
+					aria-hidden="true"></i>
+			</div>
+			<div id="j_idt116_complete" style="display: none"></div>
+		</div>
+	</h:body>
+</f:view>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/plantilla.xhtml">
+
+
+
+	<ui:define name="content">
+
+		<h:form id="form" enctype="multipart/form-data">
+			<div class="card crud-demo">
+				<p:growl id="messages" showDetail="true" />
+
+
+				<p:toolbar>
+					<p:toolbarGroup>
+						<h:outputText value="Registrar Cliente"
+							style="font-weight:bold; font-size: 23px" />
+					</p:toolbarGroup>
+
+					<p:toolbarGroup align="left">
+						<h:graphicImage value="img/almacen.png" title="Registrar Cliente"
+							style="margin-right: .5rem; max-width:70px; width:70px; background-color:transparent; 
+							">
+						</h:graphicImage>
+					</p:toolbarGroup>
+					<p:toolbarGroup>
+						<p:commandButton value="Nuevo Cliente" icon="pi pi-plus"
+							update=":form:manage-cliente-content"
+							actionListener="#{clienteMetodos.abrirNuevoCliente}"
+							oncomplete="PF('wdialogo_clienteDetalle').show()"
+							styleClass="ui-button-success" style="margin-right: .5rem">
+							<p:resetInput target=":form:manage-cliente-content" />
+						</p:commandButton>
+
+						<p:commandButton id="delete-cliente-button"
+							value="#{clienteMetodos.eliminarBotonMensaje}" icon="pi pi-trash"
+							actionListener="#{clienteMetodos.eliminarClientesSeleccionados}"
+							styleClass="ui-button-danger"
+							disabled="#{!clienteMetodos.hasSelectedClientes()}"
+							update="@this">
+							<p:confirm header="Confirmar"
+								message="Eliminar los vehículos seleccionados?"
+								icon="pi pi-exclamation-triangle" />
+						</p:commandButton>
+					</p:toolbarGroup>
+
+				</p:toolbar>
+
+				<p:dataTable id="dt-cliente" widgetVar="wdt-cliente" var="mdd"
+					value="#{clienteMetodos.clienteGrid}" reflow="true"
+					styleClass="products-table"
+					emptyMessage="No hay Clientes para mostrar"
+					filteredValue="#{clienteMetodos.clienteGridFilter}"
+					globalFilterFunction="#{clienteMetodos.globalFilterFunction}"
+					selection="#{clienteMetodos.clienteSeleccionados}"
+					rowKey="#{mdd.id_cliente}" paginator="true" rows="10"
+					rowIndexVar="rowIndex" rowSelectMode="add"
+					paginatorPosition="bottom">
+					<f:facet name="header">
+						<div class="products-table-header">
+							<span style="font-weight: bold">Clientes</span> <span
+								class="filter-container ui-input-icon-left"> <i
+								class="pi pi-search"></i> <p:inputText id="globalFilter"
+									onkeyup="PF('wdt-cliente').filter()" placeholder="Buscar" />
+							</span>
+						</div>
+					</f:facet>
+
+					<p:ajax event="rowSelect" update=":form:delete-cliente-button" />
+					<p:ajax event="rowUnselect" update=":form:delete-cliente-button" />
+					<p:ajax event="rowSelectCheckbox"
+						update=":form:delete-cliente-button" />
+					<p:ajax event="rowUnselectCheckbox"
+						update=":form:delete-cliente-button" />
+					<p:ajax event="toggleSelect" update=":form:delete-cliente-button" />
+
+					<p:column selectionMode="multiple" exportable="false"></p:column>
+
+					<!-- begin codigo -->
+					<p:column headerText="" style="width:1px;">
+						<h:outputText value="" />
+					</p:column>
+					<!-- end codigo -->
+
+					<!-- begin NombreCliente -->
+					<p:column headerText="Nombre Cliente" sortBy="#{mdd.nombreCliente}"
+						filterBy="#{mdd.nombreCliente}">
+						<h:outputText value="#{mdd.nombreCliente}" />
+					</p:column>
+					<!-- end NombreCliente -->
+
+					<!-- begin ApellidoCliente -->
+					<p:column headerText="Apellido Cliente"
+						sortBy="#{mdd.apellidoCliente}" filterBy="#{mdd.apellidoCliente}">
+						<h:outputText value="#{mdd.apellidoCliente}" />
+					</p:column>
+					<!-- end ApellidoCliente -->
+
+					<!-- begin Dirección -->
+					<p:column headerText="Dirección" sortBy="#{mdd.direccion}"
+						filterBy="#{mdd.direccion}">
+						<h:outputText value="#{mdd.direccion}" />
+					</p:column>
+					<!-- end Dirección -->
+
+					<!-- begin email -->
+					<p:column headerText="Email" sortBy="#{mdd.email}"
+						filterBy="#{mdd.email}">
+						<h:outputText value="#{mdd.email}" />
+					</p:column>
+					<!-- end email -->
+
+					<!-- begin teléfono -->
+					<p:column headerText="Teléfono" sortBy="#{mdd.telefono}"
+						filterBy="#{mdd.telefono}">
+						<h:outputText value="#{mdd.telefono}" />
+					</p:column>
+					<!-- end teléfono -->
+
+
+					<p:column headerText="Acciones" exportable="false">
+						<p:tooltip for="@next" value="Editar" />
+						<p:commandButton icon="pi pi-pencil"
+							update=":form:manage-cliente-content"
+							actionListener="#{clienteMetodos.cargarCliente(mdd)}"
+							oncomplete="PF('wdialogo_clienteDetalle').show()"
+							style="margin-right: .5rem"
+							styleClass="edit-button rounded-button ui-button-success"
+							process="@this">
+							<f:setPropertyActionListener value="#{mdd}"
+								target="#{clienteMetodos.clienteSeleccionado}" />
+							<p:resetInput target=":form:manage-cliente-content" />
+						</p:commandButton>
+
+						<p:tooltip for="@next" value="Eliminar" />
+						<p:commandButton class="ui-button-danger rounded-button"
+							icon="pi pi-trash" process="@this" style="margin-right: .5rem"
+							update=":form:delete-cliente-button"
+							oncomplete="PF('wdialogo_clienteBorrar').show()">
+							<f:setPropertyActionListener value="#{mdd}"
+								target="#{clienteMetodos.clienteSeleccionado}" />
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog id="dialogo_clienteDetalle" header="Registrar Cliente"
+					showEffect="fade" modal="true" widgetVar="wdialogo_clienteDetalle"
+					responsive="true">
+					<p:outputPanel id="manage-cliente-content" class="ui-fluid">
+						<p:outputPanel
+							rendered="#{not empty clienteMetodos.clienteSeleccionado}">
+
+							<!-- begin NombreCliente -->
+							<div class="p-field">
+								<p:outputLabel for="txt-nombre" value="Nombres"></p:outputLabel>
+								<p:inputText id="txt-nombre"
+									value="#{clienteMetodos.clienteSeleccionado.nombreCliente}" />
+							</div>
+
+							<!-- begin ApellidoCliente -->
+							<div class="p-field">
+								<p:outputLabel for="txt-apellidos" value="Apellidos"></p:outputLabel>
+								<p:inputText id="txt-apellidos"
+									value="#{clienteMetodos.clienteSeleccionado.apellidoCliente}" />
+							</div>
+
+							<!-- begin Dirección -->
+							<div class="p-field">
+								<p:outputLabel for="txt-dirección" value="Dirección"></p:outputLabel>
+								<p:inputText id="txt-dirección"
+									value="#{clienteMetodos.clienteSeleccionado.direccion}" />
+							</div>
+
+
+							<!-- begin Email -->
+							<div class="p-field">
+								<p:outputLabel for="txt-email" value="Email"></p:outputLabel>
+								<p:inputText id="txt-email"
+									value="#{clienteMetodos.clienteSeleccionado.email}" />
+							</div>
+							<!-- begin Teléfono -->
+							<div class="p-field">
+								<p:outputLabel for="txt-telefono" value="Teléfono"></p:outputLabel>
+								<p:inputText id="txt-telefono"
+									value="#{clienteMetodos.clienteSeleccionado.telefono}" />
+							</div>
+
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<f:facet name="footer">
+						<p:commandButton value="Guardar" icon="pi pi-check"
+							actionListener="#{clienteMetodos.clienteInsert}"
+							update="manage-cliente-content"
+							process="manage-cliente-content @this" />
+						<p:commandButton value="Cancelar" icon="pi pi-times"
+							onclick="PF('wdialogo_clienteDetalle').hide()"
+							class="ui-button-secondary" />
+					</f:facet>
+				</p:dialog>
+
+				<p:confirmDialog id="dialogo_clienteBorrar"
+					widgetVar="wdialogo_clienteBorrar" showEffect="fade" width="300"
+					message="Eliminar Cliente?" header="Confirmar" severity="warn">
+					<p:commandButton value="Si" icon="pi pi-check"
+						actionListener="#{clienteMetodos.clienteDelete}" process="@this"
+						oncomplete="PF('wdialogo_clienteBorrar').hide()" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-button-secondary" icon="pi pi-times"
+						onclick="PF('wdialogo_clienteBorrar').hide()" />
+				</p:confirmDialog>
+
+				<p:confirmDialog global="true" showEffect="fade" width="300">
+					<p:commandButton value="Si" type="button"
+						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no ui-button-secondary"
+						icon="pi pi-times" />
+				</p:confirmDialog>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

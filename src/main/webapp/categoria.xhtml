@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/plantilla.xhtml">
+
+
+
+	<ui:define name="content">
+
+		<h:form id="form" enctype="multipart/form-data">
+			<div class="card crud-demo">
+				<p:growl id="messages" showDetail="true" />
+
+
+				<p:toolbar>
+					<p:toolbarGroup>
+						<h:outputText value="Registrar Categoria"
+							style="font-weight:bold; font-size: 23px" />
+					</p:toolbarGroup>
+
+					<p:toolbarGroup align="left">
+						<h:graphicImage value="img/almacen.png" title="Registrar Categoria"
+							style="margin-right: .5rem; max-width:70px; width:70px; background-color:transparent; 
+							">
+						</h:graphicImage>
+					</p:toolbarGroup>
+					<p:toolbarGroup>
+						<p:commandButton value="Nuevo Categoria" icon="pi pi-plus"
+							update=":form:manage-categoria-content"
+							actionListener="#{categoriaMetodos.abrirNuevoCategoria}"
+							oncomplete="PF('wdialogo_categoriaDetalle').show()"
+							styleClass="ui-button-success" style="margin-right: .5rem">
+							<p:resetInput target=":form:manage-categoria-content" />
+						</p:commandButton>
+
+						<p:commandButton id="delete-categoria-button"
+							value="#{categoriaMetodos.eliminarBotonMensaje}" icon="pi pi-trash"
+							actionListener="#{categoriaMetodos.eliminarCategoriasSeleccionados}"
+							styleClass="ui-button-danger"
+							disabled="#{!categoriaMetodos.hasSelectedCategorias()}"
+							update="@this">
+							<p:confirm header="Confirmar"
+								message="Eliminar los vehículos seleccionados?"
+								icon="pi pi-exclamation-triangle" />
+						</p:commandButton>
+					</p:toolbarGroup>
+
+				</p:toolbar>
+
+				<p:dataTable id="dt-categoria" widgetVar="wdt-categoria" var="mdd"
+					value="#{categoriaMetodos.categoriaGrid}" reflow="true"
+					styleClass="products-table"
+					emptyMessage="No hay Categorias para mostrar"
+					filteredValue="#{categoriaMetodos.categoriaGridFilter}"
+					globalFilterFunction="#{categoriaMetodos.globalFilterFunction}"
+					selection="#{categoriaMetodos.categoriaSeleccionados}"
+					rowKey="#{mdd.id_categoria}" paginator="true" rows="10"
+					rowIndexVar="rowIndex" rowSelectMode="add"
+					paginatorPosition="bottom">
+					<f:facet name="header">
+						<div class="products-table-header">
+							<span style="font-weight: bold">Categorias</span> <span
+								class="filter-container ui-input-icon-left"> <i
+								class="pi pi-search"></i> <p:inputText id="globalFilter"
+									onkeyup="PF('wdt-categoria').filter()" placeholder="Buscar" />
+							</span>
+						</div>
+					</f:facet>
+
+					<p:ajax event="rowSelect" update=":form:delete-categoria-button" />
+					<p:ajax event="rowUnselect" update=":form:delete-categoria-button" />
+					<p:ajax event="rowSelectCheckbox"
+						update=":form:delete-categoria-button" />
+					<p:ajax event="rowUnselectCheckbox"
+						update=":form:delete-categoria-button" />
+					<p:ajax event="toggleSelect" update=":form:delete-categoria-button" />
+
+					<p:column selectionMode="multiple" exportable="false"></p:column>
+
+					<!-- begin codigo -->
+					<p:column headerText="" style="width:1px;">
+						<h:outputText value="" />
+					</p:column>
+					<!-- end codigo -->
+
+					<!-- begin NombreCategoria -->
+					<p:column headerText="Nombre Categoria" sortBy="#{mdd.nombreCategoria}"
+						filterBy="#{mdd.nombreCategoria}">
+						<h:outputText value="#{mdd.nombreCategoria}" />
+					</p:column>
+					<!-- end NombreCategoria -->
+
+					<!-- begin Descripción -->
+					<p:column headerText="Descripción"
+						sortBy="#{mdd.descripcionCategoria}" filterBy="#{mdd.descripcionCategoria}">
+						<h:outputText value="#{mdd.descripcionCategoria}" />
+					</p:column>
+					<!-- end Descripción -->
+
+
+					<p:column headerText="Acciones" exportable="false">
+						<p:tooltip for="@next" value="Editar" />
+						<p:commandButton icon="pi pi-pencil"
+							update=":form:manage-categoria-content"
+							actionListener="#{categoriaMetodos.cargarCategoria(mdd)}"
+							oncomplete="PF('wdialogo_categoriaDetalle').show()"
+							style="margin-right: .5rem"
+							styleClass="edit-button rounded-button ui-button-success"
+							process="@this">
+							<f:setPropertyActionListener value="#{mdd}"
+								target="#{categoriaMetodos.categoriaSeleccionado}" />
+							<p:resetInput target=":form:manage-categoria-content" />
+						</p:commandButton>
+
+						<p:tooltip for="@next" value="Eliminar" />
+						<p:commandButton class="ui-button-danger rounded-button"
+							icon="pi pi-trash" process="@this" style="margin-right: .5rem"
+							update=":form:delete-categoria-button"
+							oncomplete="PF('wdialogo_categoriaBorrar').show()">
+							<f:setPropertyActionListener value="#{mdd}"
+								target="#{categoriaMetodos.categoriaSeleccionado}" />
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog id="dialogo_categoriaDetalle" header="Registrar Categoria"
+					showEffect="fade" modal="true" widgetVar="wdialogo_categoriaDetalle"
+					responsive="true">
+					<p:outputPanel id="manage-categoria-content" class="ui-fluid">
+						<p:outputPanel
+							rendered="#{not empty categoriaMetodos.categoriaSeleccionado}">
+
+							<!-- begin NombreCategoria -->
+							<div class="p-field">
+								<p:outputLabel for="txt-nombre" value="Nombres"></p:outputLabel>
+								<p:inputText id="txt-nombre"
+									value="#{categoriaMetodos.categoriaSeleccionado.nombreCategoria}" />
+							</div>
+
+							<!-- begin Descripción -->
+							<div class="p-field">
+								<p:outputLabel for="txt-descripcion" value="Descripcion"></p:outputLabel>
+								<p:inputText id="txt-descripcion"
+									value="#{categoriaMetodos.categoriaSeleccionado.descripcionCategoria}" />
+							</div>
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<f:facet name="footer">
+						<p:commandButton value="Guardar" icon="pi pi-check"
+							actionListener="#{categoriaMetodos.categoriaInsert}"
+							update="manage-categoria-content"
+							process="manage-categoria-content @this" />
+						<p:commandButton value="Cancelar" icon="pi pi-times"
+							onclick="PF('wdialogo_categoriaDetalle').hide()"
+							class="ui-button-secondary" />
+					</f:facet>
+				</p:dialog>
+
+				<p:confirmDialog id="dialogo_categoriaBorrar"
+					widgetVar="wdialogo_categoriaBorrar" showEffect="fade" width="300"
+					message="Eliminar Categoria?" header="Confirmar" severity="warn">
+					<p:commandButton value="Si" icon="pi pi-check"
+						actionListener="#{categoriaMetodos.categoriaDelete}" process="@this"
+						oncomplete="PF('wdialogo_categoriaBorrar').hide()" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-button-secondary" icon="pi pi-times"
+						onclick="PF('wdialogo_categoriaBorrar').hide()" />
+				</p:confirmDialog>
+
+				<p:confirmDialog global="true" showEffect="fade" width="300">
+					<p:commandButton value="Si" type="button"
+						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no ui-button-secondary"
+						icon="pi pi-times" />
+				</p:confirmDialog>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

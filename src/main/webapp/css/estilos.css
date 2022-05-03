@@ -1,0 +1,39 @@
+
+h1 {
+	background:linear-gradient(to bottom right, MidnightBlue,  steelblue);
+	background:-webkit-linear-gradient(to bottom right, MidnightBlue,  steelblue);
+	background:-moz-linear-gradient(to bottom right, MidnightBlue,  steelblue);
+	background:-o-linear-gradient(to bottom right, MidnightBlue,  steelblue);
+	background:-ms-linear-gradient(to bottom right, MidnightBlue,  steelblue); 
+ 	}
+
+
+
+.ui-g div {
+    background-color: #ededed;
+    text-align: center;
+    border: 1px solid #fafafa;
+}
+
+
+.ui-toggleswitch {
+        vertical-align: bottom;
+    }
+
+
+.myPanelStyle1.ui-panel .ui-panel-titlebar {
+	background:#003946;
+}
+
+.myPanelStyleTitle.ui-panel .ui-panel-titlebar .ui-panel-title {
+	background:#003946;
+	color:white;
+	font-weight:bold;
+	font-family: verdana;
+}
+
+
+<link type="text/css" rel="stylesheet" href="%PATH_TO_THEME_FOLDER%/skin.css">
+<link type="text/css" rel="stylesheet" href="{CONTEXT_PATH}/css/redmond/skin.css">
+
+
